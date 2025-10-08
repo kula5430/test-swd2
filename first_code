@@ -1,0 +1,12 @@
+import pandas as pd
+from scipy.stats import shapiro
+
+# Load data
+df = pd.read_csv(r"C:\Users\gykt\OneDrive - University of Leeds\Ollie.csv")
+
+# Group by Date & Condition
+for date, d in df.groupby("Date"):
+    print(f"\nDate: {date}")
+    for cond, c in d.groupby("Condition"):
+        stat, p = shapiro(c["weight"])
+        print(f"  Condition {cond}: W={stat:.3f}, p={p:.3f}")
